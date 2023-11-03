@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #timer {
+      padding: 100px 200px;
+      display: flex;
+      text-align: center;
+      margin-top: 50px;
+      align-items:center;
+      flex-direction: column;
+      justify-content: space-between;
+      margin: 20px 20px;
+    }
+
+    #time {
+      font-size: 200px;
+      padding: 30px 30px;
+      
+      
+      margin-right: 10px;
+    }
+
+    #btn {
+      margin: 20px 20px;
+      font-size: 18px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #timer2{
+      margin: 50px 50px;
+      
+      background-color: #f2f2f2;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+    select {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    /* Style for the dropdown select when hovered */
+    select:hover {
+      border-color: #999;
+    }
+
+    /* Style for the dropdown select when focused */
+    select:focus {
+      outline: none;
+      border-color: #555;
+    }
+    #btn:hover {
+      background-color: #45a049;
+    }
+  </style>
+<body>
+    <div id="timer">
+        <div id="timer2">
+          <label for="" id="time">5</label>
+          <select id="dropdown" onchange="displayTime()">
+            <option value="5">5</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+        
+        <button onclick="timer()" id="btn">start countdown</button>
+    </div>
+    
+   <script>
+    function playAudio() {
+      const audio = new Audio('./success-fanfare-trumpets-6185.mp3'); 
+      audio.play();
+    }
+    function displayTime(){
+      console.log('in funciton')
+      let time=document.getElementById('time')
+      let selected=document.getElementById('dropdown')
+      console.log(selected.value)
+      time.textContent=selected.value
+    }
+    function timer(){
+    Time=document.getElementById('time')
+      let interval = setInterval(()=>{ 
+        Time.textContent = String(Number(Time.textContent)-1) 
+        if(Time.textContent=="0"){
+            clearInterval(interval)
+            playAudio()
+            setTimeout(()=>{
+                Time.textContent=document.getElementById('dropdown').value
+            }, 1000)
+            
+        }
+     },1000*60) 
+    }
+   </script>
+</body>
+</html>
