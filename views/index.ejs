@@ -140,8 +140,8 @@
       interval = setInterval(()=>{ 
         Time.textContent = String(Number(Time.textContent)-1) 
         if(Time.textContent=="0"){
-            clearInterval(interval)
-            playAudio()
+            stopTimer()
+            playAudioEnd()
             setTimeout(()=>{
                 Time.textContent=document.getElementById('dropdown').value
             }, 1000)
