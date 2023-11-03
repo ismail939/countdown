@@ -76,24 +76,55 @@
           </select>
         </div>
         
-        <button onclick="timer()" id="btn">start countdown</button>
+        <button onclick="runtimer()" id="btn">start countdown</button>
+        <span id="o">o</span>
     </div>
     
    <script>
+    var interval
+    var ointerval
+    o=document.getElementById('o')
+    o.style.display='none'
+    let down=false
     function playAudio() {
       const audio = new Audio('./success-fanfare-trumpets-6185.mp3'); 
       audio.play();
     }
     function displayTime(){
-      console.log('in funciton')
+      stopTimer()
       let time=document.getElementById('time')
       let selected=document.getElementById('dropdown')
       console.log(selected.value)
       time.textContent=selected.value
     }
+    function runtimer(){
+      if(down){
+        alert('already running')
+        return
+      }else{
+        timer()
+      }
+    }
+    function stopTimer(){
+      clearInterval(interval)
+      clearInterval(ointerval)
+      down=false
+      o.style.display='none'
+    }
     function timer(){
+      down=true
+      
+      ointerval=setInterval(()=>{
+        if(o.style.display==='none')
+        {
+          o.style.display='block'
+        }
+        else{
+          o.style.display='none'
+        }
+      }, 500)
     Time=document.getElementById('time')
-      let interval = setInterval(()=>{ 
+      interval = setInterval(()=>{ 
         Time.textContent = String(Number(Time.textContent)-1) 
         if(Time.textContent=="0"){
             clearInterval(interval)
